@@ -8,6 +8,6 @@ internal class UnrecognizedOpcode : MnemonicFormatter, IMnemonic
     
     public string Disassemble()
     {
-        return "# Unrecognized Opcode";
+        return Format(Opcode.ToString("X4"), "# Unrecognized Opcode");
     }
 }

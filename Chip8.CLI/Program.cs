@@ -3,7 +3,7 @@
 using Chip8;
 using Chip8.Display;
 
-var romPath = args.Length > 0 ? $"Roms/{args[0]}" : "Roms/INVADERS";
+var romPath = args.Length > 0 ? $"Roms/{args[0]}" : "Roms/PONG";
 
 var dasm = Disassembler.Create();
 Console.Write(dasm.Disassemble(romPath));

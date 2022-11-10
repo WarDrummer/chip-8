@@ -32,14 +32,11 @@ public class Disassembler : IDisassembler
         foreach (var opcode in opcodes)
         {
             var mnemonic = _mnemonicFactory.Parse(opcode);
-            if (!(mnemonic is UnrecognizedOpcode or SystemCall))
-            {
-                romText
-                    .Append($"0x{lineNumber:X4} ")
-                    .Append($"{opcode:X4}\t")
-                    .Append(mnemonic.Disassemble())
-                    .AppendLine();
-            }
+            romText
+                .Append($"0x{lineNumber:X4} ")
+                .Append($"{opcode:X4}\t")
+                .Append(mnemonic.Disassemble())
+                .AppendLine();
 
             lineNumber += 2;
         }

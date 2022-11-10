@@ -10,6 +10,6 @@ internal class ADDI : MnemonicFormatter, IMnemonic
 
     public string Disassemble()
     {
-        return Format("ADDI", X);
+        return Format("ADD", "I", X);
     }
 }

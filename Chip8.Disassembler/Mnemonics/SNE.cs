@@ -2,14 +2,14 @@
 
 namespace Chip8.Mnemonics;
 
-internal class SKPR : MnemonicFormatter, IMnemonic
+internal class SNE : MnemonicFormatter, IMnemonic
 {
-    internal SKPR(ushort opcode) : base(opcode)
+    internal SNE(ushort opcode) : base(opcode)
     {
     }
     
     public string Disassemble()
     {
-        return Format("SKPR", X);
+        return Format("SNE", X, NN);
     }
 }

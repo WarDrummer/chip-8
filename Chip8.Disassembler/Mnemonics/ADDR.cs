@@ -10,6 +10,6 @@ internal class ADDR : MnemonicFormatter, IMnemonic
     
     public string Disassemble()
     {
-        return Format("ADDR", X, Y);
+        return Format("ADD", X, Y);
     }
 }

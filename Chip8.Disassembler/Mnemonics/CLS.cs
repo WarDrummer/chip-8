@@ -2,14 +2,14 @@
 
 namespace Chip8.Mnemonics;
 
-internal class BCD : MnemonicFormatter, IMnemonic
+internal class CLS : MnemonicFormatter, IMnemonic
 {
-    internal BCD(ushort opcode) : base(opcode)
+    internal CLS(ushort opcode) : base(opcode)
     {
     }
     
     public string Disassemble()
     {
-        return Format("BCD", X);
+        return Format("CLS");
     }
 }
