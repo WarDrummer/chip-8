@@ -1,8 +1,8 @@
-using Chip8.Instructions;
+using Chip8.Opcodes;
 
 namespace Chip8.Decoder;
 
 internal interface IDecoder
 {
-    IInstruction Decode(ushort opcode);
+    IOpcode Decode(ushort opcode);
 }

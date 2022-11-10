@@ -1,7 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using Chip8.Decoder;
-using Chip8.Instructions;
+using Chip8.Opcodes;
 using Xunit;
 
 namespace Chip8;
@@ -9,45 +9,46 @@ namespace Chip8;
 public class Decoder_should_
 {
     [Theory]
-    [InlineData(0x00E0, typeof(ClearScreen_00E0))]
-    [InlineData(0x00EE, typeof(ExitSubroutine_00EE))]
-    [InlineData(0x0000, typeof(CallMachineCode_0NNN))]
-    [InlineData(0x1000, typeof(JumpToAddress_1NNN))]
-    [InlineData(0x2000, typeof(EnterSubroutine_2NNN))]
-    [InlineData(0x3000, typeof(SkipOnEqualsConstant_3XNN))]
-    [InlineData(0x4000, typeof(SkipOnNotEqualsConstant_4XNN))]
-    [InlineData(0x5000, typeof(SkipOnEqualsRegister_5XY0))]
-    [InlineData(0x6000, typeof(AssignConstant_6XNN))]
-    [InlineData(0x7000, typeof(AddConstant_7XNN))]
-    [InlineData(0x8000, typeof(AssignRegisterValue_8XY0))]
-    [InlineData(0x8001, typeof(BitwiseOr_8XY1))]
-    [InlineData(0x8002, typeof(BitwiseAnd_8XY2))]
-    [InlineData(0x8003, typeof(BitwiseXor_8XY3))]
-    [InlineData(0x8004, typeof(PlusEquals_8XY4))]
-    [InlineData(0x8005, typeof(MinusEqual_8XY5))]
-    [InlineData(0x8006, typeof(ShiftRight_8XY6))]
-    [InlineData(0x8007, typeof(Subtract_8XY7))]
-    [InlineData(0x800E, typeof(ShiftLeft_8XYE))]
-    [InlineData(0x9000, typeof(SkipOnNotEqualsRegister_9XY0))]
-    [InlineData(0xA000, typeof(AssignAddress_ANNN))]
-    [InlineData(0xB000, typeof(JumpToAddress_BNNN))]
-    [InlineData(0xC000, typeof(RandomNumber_CXNN))]
-    [InlineData(0xD000, typeof(Draw_DXYN))]
-    [InlineData(0xE09E, typeof(SkipOnKeyPress_EX9E))]
-    [InlineData(0xE0A1, typeof(SkipOnNoKeyPress_EXA1))]
-    [InlineData(0xF007, typeof(GetDelay_FX07))]
-    [InlineData(0xF00A, typeof(GetKeyPress_FX0A))]
-    [InlineData(0xF015, typeof(SetDelayTimer_FX15))]
-    [InlineData(0xF018, typeof(SetSoundTimer_FX18))]
-    [InlineData(0xF01E, typeof(AddToI_FX1E))]
-    [InlineData(0xF029, typeof(AssignSprite_FX29))]
-    [InlineData(0xF033, typeof(AssignBCD_FX33))]
-    [InlineData(0xF055, typeof(DumpRegisters_FX55))]
-    [InlineData(0xF065, typeof(LoadRegisters_FX65))]
-    [InlineData(0xFFFF, typeof(NoOp))]
-    public void create_instance_of_correct_instruction_based_on_opcode(ushort opcode, Type instructionType)
+    [InlineData("00E0", typeof(Ox00E0))]
+    [InlineData("00EE", typeof(Ox00EE))]
+    [InlineData("0NNN", typeof(Ox0NNN))]
+    [InlineData("1NNN", typeof(Ox1NNN))]
+    [InlineData("2NNN", typeof(Ox2NNN))]
+    [InlineData("3XNN", typeof(Ox3XNN))]
+    [InlineData("4XNN", typeof(Ox4XNN))]
+    [InlineData("5XY0", typeof(Ox5XY0))]
+    [InlineData("6XNN", typeof(Ox6XNN))]
+    [InlineData("7XNN", typeof(Ox7XNN))]
+    [InlineData("8XY0", typeof(Ox8XY0))]
+    [InlineData("8XY1", typeof(Ox8XY1))]
+    [InlineData("8XY2", typeof(Ox8XY2))]
+    [InlineData("8XY3", typeof(Ox8XY3))]
+    [InlineData("8XY4", typeof(Ox8XY4))]
+    [InlineData("8XY5", typeof(Ox8XY5))]
+    [InlineData("8XY6", typeof(Ox8XY6))]
+    [InlineData("8XY7", typeof(Ox8XY7))]
+    [InlineData("8XYE", typeof(Ox8XYE))]
+    [InlineData("9XY0", typeof(Ox9XY0))]
+    [InlineData("ANNN", typeof(OxANNN))]
+    [InlineData("BNNN", typeof(OxBNNN))]
+    [InlineData("CXNN", typeof(OxCXNN))]
+    [InlineData("DXYN", typeof(OxDXYN))]
+    [InlineData("EX9E", typeof(OxEX9E))]
+    [InlineData("EXA1", typeof(OxEXA1))]
+    [InlineData("FX07", typeof(OxFX07))]
+    [InlineData("FX0A", typeof(OxFX0A))]
+    [InlineData("FX15", typeof(OxFX15))]
+    [InlineData("FX18", typeof(OxFX18))]
+    [InlineData("FX1E", typeof(OxFX1E))]
+    [InlineData("FX29", typeof(OxFX29))]
+    [InlineData("FX33", typeof(OxFX33))]
+    [InlineData("FX55", typeof(OxFX55))]
+    [InlineData("FX65", typeof(OxFX65))]
+    [InlineData("FFFF", typeof(UnrecognizedOpcode))]
+    public void create_instance_of_correct_instruction_based_on_opcode(string opcodeTemplate, Type instructionType)
     {
         IDecoder decoder = new Decoder.Decoder();
+        var opcode = OpcodeGenerator.Create(opcodeTemplate);
         var instruction = decoder.Decode(opcode);
         Assert.IsType(instructionType, instruction);
     }
