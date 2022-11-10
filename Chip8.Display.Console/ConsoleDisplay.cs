@@ -1,8 +1,6 @@
 using System.Text;
 
-namespace Chip8.Display.Console;
-
-using Console = System.Console;
+namespace Chip8.Display;
 
 public class ConsoleDisplay : IDisplay
 {

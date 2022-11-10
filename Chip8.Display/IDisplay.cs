@@ -1,4 +1,4 @@
-namespace Chip8.Display;
+namespace Chip8;
 
 public interface IDisplay
 {

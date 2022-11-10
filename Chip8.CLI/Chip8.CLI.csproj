@@ -5,14 +5,22 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Chip8</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Chip8.Disassembler\Chip8.Disassembler.csproj" />
       <ProjectReference Include="..\Chip8.Display.Console\Chip8.Display.Console.csproj" />
-      <ProjectReference Include="..\Chip8.VM\Chip8.VM.csproj" />
+      <ProjectReference Include="..\Chip8.VirtualMachine\Chip8.VirtualMachine.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="Roms\PONG.ch8">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Roms\INVADERS.ch8">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="Roms\15PUZZLE">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -80,12 +88,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="Roms\WIPEOFF">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Roms\PONG.ch8">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Roms\INVADERS.ch8">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
