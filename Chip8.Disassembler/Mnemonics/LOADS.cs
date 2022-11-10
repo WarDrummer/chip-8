@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class LOADS : OpcodeToTextParser, IMnemonic
+internal class LOADS : MnemonicFormatter, IMnemonic
 {
     internal LOADS(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class LOADS : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"LOADS {X}";
+        return Format("LOADS", X);
     }
 }

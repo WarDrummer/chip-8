@@ -2,10 +2,14 @@
 
 namespace Chip8.Mnemonics;
 
-internal class RTS : IMnemonic
+internal class RTS : MnemonicFormatter, IMnemonic
 {
+    internal RTS(ushort opcode) : base(opcode)
+    {
+    }
+    
     public string Disassemble()
     {
-        return "RTS";
+        return Format("RTS");
     }
 }

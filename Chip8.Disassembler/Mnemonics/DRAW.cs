@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class DRAW : OpcodeToTextParser, IMnemonic
+internal class DRAW : MnemonicFormatter, IMnemonic
 {
     internal DRAW(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class DRAW : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"DRAW {X}, {Y}, {N}";
+        return Format("DRAW", X, Y, N);
     }
 }

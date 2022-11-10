@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class OR : OpcodeToTextParser, IMnemonic
+internal class OR : MnemonicFormatter, IMnemonic
 {
     internal OR(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class OR : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"OR {X}, {Y}";
+        return Format("OR", X, Y);
     }
 }

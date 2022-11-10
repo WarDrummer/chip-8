@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class XOR : OpcodeToTextParser, IMnemonic
+internal class XOR : MnemonicFormatter, IMnemonic
 {
     internal XOR(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class XOR : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"XOR {X}, {Y}";
+        return Format("XOR", X, Y);
     }
 }

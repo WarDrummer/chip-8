@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class KEYD : OpcodeToTextParser, IMnemonic
+internal class KEYD : MnemonicFormatter, IMnemonic
 {
     internal KEYD(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class KEYD : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"KEYD {X}";
+        return Format("KEYD", X);
     }
 }

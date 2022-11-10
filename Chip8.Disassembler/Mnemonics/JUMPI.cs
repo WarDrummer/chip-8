@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class JUMPI : OpcodeToTextParser, IMnemonic
+internal class JUMPI : MnemonicFormatter, IMnemonic
 {
     internal JUMPI(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class JUMPI : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"JUMPI {NNN}";
+        return Format("JUMPI", NNN);
     }
 }

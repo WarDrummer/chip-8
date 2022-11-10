@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class ADDR : OpcodeToTextParser, IMnemonic
+internal class ADDR : MnemonicFormatter, IMnemonic
 {
     internal ADDR(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class ADDR : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"ADDR {X}, {Y}";
+        return Format("ADDR", X, Y);
     }
 }

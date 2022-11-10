@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class MOVED : OpcodeToTextParser, IMnemonic
+internal class MOVED : MnemonicFormatter, IMnemonic
 {
     internal MOVED(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class MOVED : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"MOVED {X}";
+        return Format("MOVED", X);
     }
 }

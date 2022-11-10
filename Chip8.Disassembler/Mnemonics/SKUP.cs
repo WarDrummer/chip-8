@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class SKUP : OpcodeToTextParser, IMnemonic
+internal class SKUP : MnemonicFormatter, IMnemonic
 {
     internal SKUP(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class SKUP : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"SKUP {X}";
+        return Format("SKUP", X);
     }
 }

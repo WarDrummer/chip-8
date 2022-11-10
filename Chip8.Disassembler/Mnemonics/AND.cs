@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class AND : OpcodeToTextParser, IMnemonic
+internal class AND : MnemonicFormatter, IMnemonic
 {
     internal AND(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class AND : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"AND {X}, {Y}";
+        return Format("AND", X, Y);
     }
 }

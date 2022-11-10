@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class SKPR : OpcodeToTextParser, IMnemonic
+internal class SKPR : MnemonicFormatter, IMnemonic
 {
     internal SKPR(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class SKPR : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"SKPR {X}";
+        return Format("SKPR", X);
     }
 }

@@ -2,10 +2,14 @@
 
 namespace Chip8.Mnemonics;
 
-internal class CLR : IMnemonic
+internal class CLR : MnemonicFormatter, IMnemonic
 {
+    internal CLR(ushort opcode) : base(opcode)
+    {
+    }
+    
     public string Disassemble()
     {
-        return "CLR";
+        return Format("CLR");
     }
 }

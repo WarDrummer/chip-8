@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class SHL : OpcodeToTextParser, IMnemonic
+internal class SHL : MnemonicFormatter, IMnemonic
 {
     internal SHL(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class SHL : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"SHL {X}, {Y}";
+        return Format("SHL", X, Y);
     }
 }

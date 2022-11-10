@@ -14,8 +14,8 @@ internal class MnemonicFactory : IMnemonicFactory
     {
         switch (opcode)
         {
-            case 0x00E0: return new CLR();
-            case 0x00EE: return new RTS();
+            case 0x00E0: return new CLR(opcode);
+            case 0x00EE: return new RTS(opcode);
         }
 
         switch (opcode & 0xF000)

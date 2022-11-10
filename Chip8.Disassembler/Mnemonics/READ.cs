@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class READ : OpcodeToTextParser, IMnemonic
+internal class READ : MnemonicFormatter, IMnemonic
 {
     internal READ(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class READ : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"READ {X}";
+        return Format("READ", X);
     }
 }

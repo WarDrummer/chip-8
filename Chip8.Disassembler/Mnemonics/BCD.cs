@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class BCD : OpcodeToTextParser, IMnemonic
+internal class BCD : MnemonicFormatter, IMnemonic
 {
     internal BCD(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class BCD : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"BCD {X}";
+        return Format("BCD", X);
     }
 }

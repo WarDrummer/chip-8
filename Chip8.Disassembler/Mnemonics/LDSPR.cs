@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class LDSPR : OpcodeToTextParser, IMnemonic
+internal class LDSPR : MnemonicFormatter, IMnemonic
 {
     internal LDSPR(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class LDSPR : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"LDSPR {X}";
+        return Format("LDSPR", X);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class ADD : OpcodeToTextParser, IMnemonic
+internal class ADD : MnemonicFormatter, IMnemonic
 {
     internal ADD(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class ADD : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"ADD {NN}, {X}";
+        return Format("ADD", NN, X);
     }
 }

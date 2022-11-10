@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class SUB : OpcodeToTextParser, IMnemonic
+internal class SUB : MnemonicFormatter, IMnemonic
 {
     internal SUB(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class SUB : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"SUB {X}, {Y}";
+        return Format("SUB", X, Y);
     }
 }

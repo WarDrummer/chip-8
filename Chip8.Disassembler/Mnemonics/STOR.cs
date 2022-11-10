@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class STOR : OpcodeToTextParser, IMnemonic
+internal class STOR : MnemonicFormatter, IMnemonic
 {
     internal STOR(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class STOR : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"STOR {X}";
+        return Format("STOR", X);
     }
 }

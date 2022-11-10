@@ -1,4 +1,5 @@
 using System.Text;
+using Chip8.Mnemonics;
 
 namespace Chip8;
 
@@ -27,9 +28,20 @@ public class Disassembler : IDisassembler
     {
         var opcodes = _romReader.ReadRomAsOpcodes(romFilePath);
         var romText = new StringBuilder();
+        var lineNumber = 0x200;
         foreach (var opcode in opcodes)
         {
-            romText.AppendLine(_mnemonicFactory.Parse(opcode).Disassemble());
+            var mnemonic = _mnemonicFactory.Parse(opcode);
+            if (!(mnemonic is UnrecognizedOpcode or SystemCall))
+            {
+                romText
+                    .Append($"0x{lineNumber:X4} ")
+                    .Append($"{opcode:X4}\t")
+                    .Append(mnemonic.Disassemble())
+                    .AppendLine();
+            }
+
+            lineNumber += 2;
         }
         return romText.ToString();
     }

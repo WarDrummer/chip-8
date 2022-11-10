@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class SKNE : OpcodeToTextParser, IMnemonic
+internal class SKNE : MnemonicFormatter, IMnemonic
 {
     internal SKNE(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class SKNE : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"SKNE {X}, {NN}";
+        return Format("SKNE", X, NN);
     }
 }

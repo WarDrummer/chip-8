@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class JUMP : OpcodeToTextParser, IMnemonic
+internal class JUMP : MnemonicFormatter, IMnemonic
 {
     internal JUMP(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class JUMP : OpcodeToTextParser, IMnemonic
     
     public string Disassemble()
     {
-        return $"JUMP {NNN}";
+        return Format("JUMP", NNN);
     }
 }

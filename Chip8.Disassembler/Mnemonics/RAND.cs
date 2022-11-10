@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class RAND : OpcodeToTextParser, IMnemonic
+internal class RAND : MnemonicFormatter, IMnemonic
 {
     private static readonly Random _random = new ();
     
@@ -12,6 +12,6 @@ internal class RAND : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"RAND {X}, {NN}";
+        return Format("RAND", X, NN);
     }
 }

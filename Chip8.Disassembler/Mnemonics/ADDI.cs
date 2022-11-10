@@ -2,7 +2,7 @@
 
 namespace Chip8.Mnemonics;
 
-internal class ADDI : OpcodeToTextParser, IMnemonic
+internal class ADDI : MnemonicFormatter, IMnemonic
 {
     internal ADDI(ushort opcode) : base(opcode)
     {
@@ -10,6 +10,6 @@ internal class ADDI : OpcodeToTextParser, IMnemonic
 
     public string Disassemble()
     {
-        return $"ADDI {X}";
+        return Format("ADDI", X);
     }
 }
