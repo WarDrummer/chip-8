@@ -1,5 +1,6 @@
 // ReSharper disable InconsistentNaming
 
+using System.Diagnostics;
 using System.Text;
 
 namespace Chip8;
@@ -80,6 +81,8 @@ public class VirtualMachine
     /// </summary>
     internal readonly IDisplay Display;
 
+    internal bool Refresh;
+
     private readonly IRomReader _romReader;
 
     public VirtualMachine(IDisplay display): this(new Decoder(), display, RomReader.Create()) { }
@@ -95,20 +98,100 @@ public class VirtualMachine
 
     public void RunProgram(string romPath)
     {
-        LoadFonts();
-            
-        LoadRom(romPath);
-
         SP = 0;
         SoundTimer = 0;
         DelayTimer = 0;
+        Refresh = false;
         IsStopped = false;
-
+        
+        LoadFonts();
+            
+        LoadRom(romPath);
+        
+        // 500-600 Hz is the recommended average, but that is way too fast
+        var targetRefreshRateInTicks 
+            = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 210).Ticks;
+        
+        var stopWatch = Stopwatch.StartNew();
+        
         while (!IsStopped)
         {
+            var startCycle = stopWatch.ElapsedTicks;
             Step();
-            Display.Paint();
+            
+            if (Refresh)
+            {
+                Display.Paint();
+                Refresh = false;
+            }
+            
+            // TODO: KeyPresses seem to get cleared too quickly
+            KeyPressInterrupt();
+            
+            var endCycle = stopWatch.ElapsedTicks;
+            var elapsedTicks = endCycle - startCycle;
+            if (elapsedTicks < targetRefreshRateInTicks)
+            {
+                var waitTime = new TimeSpan(targetRefreshRateInTicks - elapsedTicks);
+                Thread.Sleep(waitTime);
+            }
         }
+    }
+
+    private void KeyPressInterrupt()
+    {
+        if (Console.KeyAvailable)
+        {
+            LogKeyPress();
+        }
+        else
+        {
+            ClearKeyPresses();
+        }
+    }
+
+    private void LogKeyPress()
+    {
+        var keyPress = Console.ReadKey(true).Key;
+        switch (keyPress)
+        {
+            case ConsoleKey.D1: Keys[0x1] = 1; break;
+            case ConsoleKey.D2: Keys[0x2] = 1; break;
+            case ConsoleKey.D3: Keys[0x3] = 1; break;
+            case ConsoleKey.D4: Keys[0xC] = 1; break;
+            case ConsoleKey.Q: Keys[0x4] = 1; break;
+            case ConsoleKey.W: Keys[0x5] = 1; break;
+            case ConsoleKey.E: Keys[0x6] = 1; break;
+            case ConsoleKey.R: Keys[0xD] = 1; break;
+            case ConsoleKey.A: Keys[0x7] = 1; break;
+            case ConsoleKey.S: Keys[0x8] = 1; break;
+            case ConsoleKey.D: Keys[0x9] = 1; break;
+            case ConsoleKey.F: Keys[0xE] = 1; break;
+            case ConsoleKey.Z: Keys[0xA] = 1; break;
+            case ConsoleKey.X: Keys[0x0] = 1; break;
+            case ConsoleKey.C: Keys[0xB] = 1; break;
+            case ConsoleKey.V: Keys[0xF] = 1; break;
+            case ConsoleKey.Escape: IsStopped = true; break;
+        }
+    }
+
+    private void ClearKeyPresses()
+    {
+        Keys[0x0] = Keys[0x1] = 0;
+        Keys[0x2] = 0;
+        Keys[0x3] = 0;
+        Keys[0x4] = 0;
+        Keys[0x5] = 0;
+        Keys[0x6] = 0;
+        Keys[0x7] = 0;
+        Keys[0x8] = 0;
+        Keys[0x9] = 0;
+        Keys[0xA] = 0;
+        Keys[0xB] = 0;
+        Keys[0xC] = 0;
+        Keys[0xD] = 0;
+        Keys[0xE] = 0;
+        Keys[0xF] = 0;
     }
 
     /// <summary>
@@ -142,8 +225,22 @@ public class VirtualMachine
     {
         var opcode = Fetch();
         var instruction = _decoder.Decode(opcode);
-        //Console.WriteLine($"0x{opcode:X4} @ PC={PC}");// : {instruction.ToString()?.Split(".").Last()}");
         instruction.Execute(this);
+
+        if (DelayTimer > 0)
+        {
+            DelayTimer--;
+        }
+
+        if (SoundTimer > 0)
+        {
+            if (SoundTimer == 1)
+            {
+                // play sound 
+            }
+
+            SoundTimer--;
+        }
     }
 
     /// <summary>

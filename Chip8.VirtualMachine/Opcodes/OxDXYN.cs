@@ -29,6 +29,7 @@ internal class OxDXYN : OpcodeParser, IOpcode
                 {
                     if ((pixel & _bitMasks[x]) != 0)
                     {
+                        vm.Refresh = true;
                         var idx = index + x;
                             
                         if (vm.Display.Pixels[idx] == 1)
