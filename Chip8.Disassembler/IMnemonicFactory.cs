@@ -4,5 +4,5 @@ namespace Chip8;
 
 internal interface IMnemonicFactory
 {
-    IMnemonic Decode(ushort opcode);
+    IMnemonic Parse(ushort opcode);
 }

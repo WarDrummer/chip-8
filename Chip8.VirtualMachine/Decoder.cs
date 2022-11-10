@@ -1,6 +1,6 @@
 using Chip8.Opcodes;
 
-namespace Chip8.Decoder;
+namespace Chip8;
 
 internal class Decoder : IDecoder
 {

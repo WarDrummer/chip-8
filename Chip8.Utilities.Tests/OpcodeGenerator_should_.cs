@@ -1,8 +1,6 @@
 // ReSharper disable InconsistentNaming
 
-using Xunit;
-
-namespace Chip8;
+namespace Chip8.Utilities.Tests;
 
 public class OpcodeGenerator_should_
 {

@@ -1,8 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using Chip8.Decoder;
 using Chip8.Opcodes;
-using Xunit;
 
 namespace Chip8;
 
@@ -45,11 +43,10 @@ public class Decoder_should_
     [InlineData("FX55", typeof(OxFX55))]
     [InlineData("FX65", typeof(OxFX65))]
     [InlineData("FFFF", typeof(UnrecognizedOpcode))]
-    public void create_instance_of_correct_instruction_based_on_opcode(string opcodeTemplate, Type instructionType)
+    public void create_instance_of_correct_opcode_based_on_opcode(string opcodeTemplate, Type opcodeType)
     {
-        IDecoder decoder = new Decoder.Decoder();
         var opcode = OpcodeGenerator.Create(opcodeTemplate);
-        var instruction = decoder.Decode(opcode);
-        Assert.IsType(instructionType, instruction);
+        var instruction = Decoder.Decode(opcode);
+        Assert.IsType(opcodeType, instruction);
     }
 }

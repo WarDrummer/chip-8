@@ -1,7 +1,6 @@
 // ReSharper disable InconsistentNaming
 
 using System.Text;
-using Chip8.Decoder;
 
 namespace Chip8;
 
@@ -83,9 +82,9 @@ public class VirtualMachine
 
     private readonly IRomReader _romReader;
 
-    public VirtualMachine(IDisplay display): this(new Decoder.Decoder(), display, RomReader.Create()) { }
+    public VirtualMachine(IDisplay display): this(new Decoder(), display, RomReader.Create()) { }
     
-    internal VirtualMachine(): this(new Decoder.Decoder(), new NoDisplay(), RomReader.Create()) { }
+    internal VirtualMachine(): this(new Decoder(), new NoDisplay(), RomReader.Create()) { }
     
     internal VirtualMachine(IDecoder decoder, IDisplay display, IRomReader romReader)
     {

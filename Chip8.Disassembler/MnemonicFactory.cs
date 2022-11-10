@@ -4,13 +4,13 @@ namespace Chip8;
 
 internal class MnemonicFactory : IMnemonicFactory
 {
-    IMnemonic IMnemonicFactory.Decode(ushort opcode)
+    IMnemonic IMnemonicFactory.Parse(ushort opcode)
     {
-        return Decode(opcode);
+        return Parse(opcode);
     }
     
     // https://github.com/craigthomas/Chip8Assembler#chip-8-mnemonics
-    public IMnemonic Decode(ushort opcode)
+    internal static IMnemonic Parse(ushort opcode)
     {
         switch (opcode)
         {
@@ -63,6 +63,6 @@ internal class MnemonicFactory : IMnemonicFactory
             case 0xF065: return new READ(opcode);
         }
 
-        return new NoOp(opcode);
+        return new UnrecognizedOpcode(opcode);
     }
 }

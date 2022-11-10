@@ -1,7 +1,5 @@
 // ReSharper disable InconsistentNaming
 
-using Xunit;
-
 namespace Chip8.Opcodes;
 
 public class OxFX55_should_

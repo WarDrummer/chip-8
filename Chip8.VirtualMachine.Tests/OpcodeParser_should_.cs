@@ -1,7 +1,5 @@
 // ReSharper disable InconsistentNaming
 
-using Xunit;
-
 namespace Chip8;
 
 public class OpcodeParser_should_

@@ -14,6 +14,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chip8.Disassembler", "Chip8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chip8.RomReader", "Chip8.RomReader\Chip8.RomReader.csproj", "{2E33DAF3-60D5-4667-B1F0-252EAB54DA11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chip8.Utilities", "Chip8.Utilities\Chip8.Utilities.csproj", "{A6B7EFBF-4E8A-471F-B666-1DEE5DBB8EDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chip8.Utilities.Tests", "Chip8.Utilities.Tests\Chip8.Utilities.Tests.csproj", "{3970F39F-F90D-4EC9-BC41-3D7C9AE554D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chip8.Disassembler.Tests", "Chip8.Disassembler.Tests\Chip8.Disassembler.Tests.csproj", "{A18CF3C2-B029-485A-84E1-CA0D1AA45087}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +54,17 @@ Global
 		{2E33DAF3-60D5-4667-B1F0-252EAB54DA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E33DAF3-60D5-4667-B1F0-252EAB54DA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E33DAF3-60D5-4667-B1F0-252EAB54DA11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B7EFBF-4E8A-471F-B666-1DEE5DBB8EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B7EFBF-4E8A-471F-B666-1DEE5DBB8EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B7EFBF-4E8A-471F-B666-1DEE5DBB8EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B7EFBF-4E8A-471F-B666-1DEE5DBB8EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3970F39F-F90D-4EC9-BC41-3D7C9AE554D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3970F39F-F90D-4EC9-BC41-3D7C9AE554D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3970F39F-F90D-4EC9-BC41-3D7C9AE554D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3970F39F-F90D-4EC9-BC41-3D7C9AE554D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A18CF3C2-B029-485A-84E1-CA0D1AA45087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18CF3C2-B029-485A-84E1-CA0D1AA45087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18CF3C2-B029-485A-84E1-CA0D1AA45087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18CF3C2-B029-485A-84E1-CA0D1AA45087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

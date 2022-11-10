@@ -1,7 +1,6 @@
 // ReSharper disable InconsistentNaming
 
 using Chip8.ExtensionMethods;
-using Xunit;
 
 namespace Chip8.Opcodes;
 

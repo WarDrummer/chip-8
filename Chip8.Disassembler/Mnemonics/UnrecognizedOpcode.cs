@@ -1,8 +1,8 @@
 namespace Chip8.Mnemonics;
 
-internal class NoOp : OpcodeToTextParser, IMnemonic
+internal class UnrecognizedOpcode : OpcodeToTextParser, IMnemonic
 {
-    internal NoOp(ushort opcode) : base(opcode)
+    internal UnrecognizedOpcode(ushort opcode) : base(opcode)
     {
     }
     

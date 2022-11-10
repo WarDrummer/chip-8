@@ -1,7 +1,6 @@
 // ReSharper disable InconsistentNaming
 
 using Moq;
-using Xunit;
 
 namespace Chip8.Opcodes;
 
@@ -11,7 +10,7 @@ public class Ox00E0_should_
     public void clear_display()
     {
         var mockDisplay = new Mock<IDisplay>();
-        var vm = new VirtualMachine(new Decoder.Decoder(), mockDisplay.Object, RomReader.Create());
+        var vm = new VirtualMachine(new Decoder(), mockDisplay.Object, RomReader.Create());
         
         new Ox00E0().Execute(vm);
         

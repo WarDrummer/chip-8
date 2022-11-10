@@ -29,7 +29,7 @@ public class Disassembler : IDisassembler
         var romText = new StringBuilder();
         foreach (var opcode in opcodes)
         {
-            romText.AppendLine(_mnemonicFactory.Decode(opcode).Disassemble());
+            romText.AppendLine(_mnemonicFactory.Parse(opcode).Disassemble());
         }
         return romText.ToString();
     }
