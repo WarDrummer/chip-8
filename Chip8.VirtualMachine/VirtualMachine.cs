@@ -125,9 +125,6 @@ public class VirtualMachine
                 Refresh = false;
             }
             
-            // TODO: KeyPresses seem to get cleared too quickly
-            KeyPressInterrupt();
-            
             var endCycle = stopWatch.ElapsedTicks;
             var elapsedTicks = endCycle - startCycle;
             if (elapsedTicks < targetRefreshRateInTicks)
@@ -135,6 +132,9 @@ public class VirtualMachine
                 var waitTime = new TimeSpan(targetRefreshRateInTicks - elapsedTicks);
                 Thread.Sleep(waitTime);
             }
+            
+            // TODO: KeyPresses seem to get cleared too quickly
+            KeyPressInterrupt();
         }
     }
 
