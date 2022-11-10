@@ -9,7 +9,7 @@ internal class MnemonicFactory : IMnemonicFactory
         return Parse(opcode);
     }
     
-    // https://github.com/craigthomas/Chip8Assembler#chip-8-mnemonics
+    // http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#keyboard
     internal static IMnemonic Parse(ushort opcode)
     {
         switch (opcode)
