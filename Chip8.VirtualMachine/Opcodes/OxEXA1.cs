@@ -12,6 +12,7 @@ internal class OxEXA1 : OpcodeParser, IOpcode
     {
         if (vm.Keyboard[vm.V[X]] == 0)
         {
+            vm.Keyboard.ClearKeyPresses();
             vm.PC += 4;
         }
         else
