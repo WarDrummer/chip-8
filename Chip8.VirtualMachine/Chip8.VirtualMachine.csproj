@@ -80,7 +80,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Chip8.Display\Chip8.Display.csproj" />
+      <ProjectReference Include="..\Chip8.IO\Chip8.IO.csproj" />
       <ProjectReference Include="..\Chip8.RomReader\Chip8.RomReader.csproj" />
     </ItemGroup>
 

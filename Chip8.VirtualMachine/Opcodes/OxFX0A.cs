@@ -10,9 +10,9 @@ internal class OxFX0A : OpcodeParser, IOpcode
         
     public void Execute(VirtualMachine vm)
     {
-        for(byte key = 0; key < vm.Keys.Length; key++)
+        for(byte key = 0; key < 16; key++)
         {
-            if (vm.Keys[key] != 0)
+            if (vm.Keyboard[key] != 0)
             {
                 vm.V[X] = key;
                 vm.PC += 2;

@@ -10,7 +10,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Chip8.Disassembler\Chip8.Disassembler.csproj" />
-      <ProjectReference Include="..\Chip8.Display.Console\Chip8.Display.Console.csproj" />
+      <ProjectReference Include="..\Chip8.IO.ConsoleDisplay\Chip8.IO.ConsoleDisplay.csproj" />
+      <ProjectReference Include="..\Chip8.IO.ConsoleKeyboard\Chip8.IO.ConsoleKeyboard.csproj" />
       <ProjectReference Include="..\Chip8.VirtualMachine\Chip8.VirtualMachine.csproj" />
     </ItemGroup>
 

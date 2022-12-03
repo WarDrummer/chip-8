@@ -4,11 +4,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Chip8.Display</RootNamespace>
+        <RootNamespace>Chip8.IO.Display</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Chip8.Display\Chip8.Display.csproj" />
+      <ProjectReference Include="..\Chip8.IO\Chip8.IO.csproj" />
     </ItemGroup>
 
 </Project>

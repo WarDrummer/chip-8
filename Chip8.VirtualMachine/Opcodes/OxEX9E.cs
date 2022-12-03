@@ -10,7 +10,7 @@ internal class OxEX9E : OpcodeParser, IOpcode
         
     public void Execute(VirtualMachine vm)
     {
-        if (vm.Keys[vm.V[X]] != 0)
+        if (vm.Keyboard[vm.V[X]] != 0)
         {
             vm.PC += 4;
         }

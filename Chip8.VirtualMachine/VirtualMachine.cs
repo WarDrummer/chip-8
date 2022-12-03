@@ -2,6 +2,7 @@
 
 using System.Diagnostics;
 using System.Text;
+using Chip8.IO;
 
 namespace Chip8;
 
@@ -39,7 +40,7 @@ public class VirtualMachine
     /// <summary>
     ///     Tracks key presses
     /// </summary>
-    internal byte[] Keys { get; } = new byte[16];
+    internal Keyboard Keyboard { get; }
 
     /// <summary>
     ///     4096 bytes of RAM
@@ -65,11 +66,6 @@ public class VirtualMachine
     ///     Used for sound effects
     /// </summary>
     internal byte DelayTimer { get; set; }
-
-    /// <summary>
-    ///     Signals whether or not to stop program execution
-    /// </summary>
-    internal bool IsStopped { get; set; }
     
     /// <summary>
     ///     Decodes opcodes into instructions
@@ -85,14 +81,15 @@ public class VirtualMachine
 
     private readonly IRomReader _romReader;
 
-    public VirtualMachine(IDisplay display): this(new Decoder(), display, RomReader.Create()) { }
+    public VirtualMachine(IDisplay display, Keyboard keyboard): this(new Decoder(), display, keyboard, RomReader.Create()) { }
     
-    internal VirtualMachine(): this(new Decoder(), new NoDisplay(), RomReader.Create()) { }
+    internal VirtualMachine(): this(new Decoder(), new NoDisplay(), new NoKeyboard(), RomReader.Create()) { }
     
-    internal VirtualMachine(IDecoder decoder, IDisplay display, IRomReader romReader)
+    internal VirtualMachine(IDecoder decoder, IDisplay display, Keyboard keyboard, IRomReader romReader)
     {
         _decoder = decoder;
         Display = display;
+        Keyboard = keyboard;
         _romReader = romReader;
     }
 
@@ -102,8 +99,8 @@ public class VirtualMachine
         SoundTimer = 0;
         DelayTimer = 0;
         Refresh = false;
-        IsStopped = false;
-        
+        Keyboard.Reset();
+
         LoadFonts();
             
         LoadRom(romPath);
@@ -114,7 +111,7 @@ public class VirtualMachine
         
         var stopWatch = Stopwatch.StartNew();
         
-        while (!IsStopped)
+        while (!Keyboard.IsExited)
         {
             var startCycle = stopWatch.ElapsedTicks;
             Step();
@@ -133,65 +130,8 @@ public class VirtualMachine
                 Thread.Sleep(waitTime);
             }
             
-            // TODO: KeyPresses seem to get cleared too quickly
-            KeyPressInterrupt();
+            Keyboard.ReadKey();
         }
-    }
-
-    private void KeyPressInterrupt()
-    {
-        if (Console.KeyAvailable)
-        {
-            LogKeyPress();
-        }
-        else
-        {
-            ClearKeyPresses();
-        }
-    }
-
-    private void LogKeyPress()
-    {
-        var keyPress = Console.ReadKey(true).Key;
-        switch (keyPress)
-        {
-            case ConsoleKey.D1: Keys[0x1] = 1; break;
-            case ConsoleKey.D2: Keys[0x2] = 1; break;
-            case ConsoleKey.D3: Keys[0x3] = 1; break;
-            case ConsoleKey.D4: Keys[0xC] = 1; break;
-            case ConsoleKey.Q: Keys[0x4] = 1; break;
-            case ConsoleKey.W: Keys[0x5] = 1; break;
-            case ConsoleKey.E: Keys[0x6] = 1; break;
-            case ConsoleKey.R: Keys[0xD] = 1; break;
-            case ConsoleKey.A: Keys[0x7] = 1; break;
-            case ConsoleKey.S: Keys[0x8] = 1; break;
-            case ConsoleKey.D: Keys[0x9] = 1; break;
-            case ConsoleKey.F: Keys[0xE] = 1; break;
-            case ConsoleKey.Z: Keys[0xA] = 1; break;
-            case ConsoleKey.X: Keys[0x0] = 1; break;
-            case ConsoleKey.C: Keys[0xB] = 1; break;
-            case ConsoleKey.V: Keys[0xF] = 1; break;
-            case ConsoleKey.Escape: IsStopped = true; break;
-        }
-    }
-
-    private void ClearKeyPresses()
-    {
-        Keys[0x0] = Keys[0x1] = 0;
-        Keys[0x2] = 0;
-        Keys[0x3] = 0;
-        Keys[0x4] = 0;
-        Keys[0x5] = 0;
-        Keys[0x6] = 0;
-        Keys[0x7] = 0;
-        Keys[0x8] = 0;
-        Keys[0x9] = 0;
-        Keys[0xA] = 0;
-        Keys[0xB] = 0;
-        Keys[0xC] = 0;
-        Keys[0xD] = 0;
-        Keys[0xE] = 0;
-        Keys[0xF] = 0;
     }
 
     /// <summary>
@@ -253,7 +193,6 @@ public class VirtualMachine
     {
         if (Memory.Length <= PC + 1)
         {
-            IsStopped = true;
             return 0x0;
         }
         var hi = Memory[PC];

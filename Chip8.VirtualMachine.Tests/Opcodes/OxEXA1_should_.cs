@@ -16,7 +16,7 @@ public class OxEXA1_should_
             .RandomizeRegisters(maxValue: 0xF)
             .RandomizeKeys();
         
-        vm.Keys[vm.V[opParser.X]] = 0;
+        vm.Keyboard[vm.V[opParser.X]] = 0;
             
         var startingPc = vm.PC;
         
@@ -35,7 +35,7 @@ public class OxEXA1_should_
             .RandomizeRegisters(maxValue: 0xF)
             .RandomizeKeys();
         
-        vm.Keys[vm.V[opParser.X]] = 1;
+        vm.Keyboard[vm.V[opParser.X]] = 1;
             
         var startingPc = vm.PC;
         

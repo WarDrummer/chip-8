@@ -1,4 +1,4 @@
-namespace Chip8.Display;
+namespace Chip8.IO.Display;
 
 public class ConsoleDirectDisplay : IDisplay
 {

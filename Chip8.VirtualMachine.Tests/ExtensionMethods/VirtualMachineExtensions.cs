@@ -34,15 +34,15 @@ public static class VirtualMachineExtensions
 
     internal static VirtualMachine SetRandomKey(this VirtualMachine vm)
     {
-        vm.Keys[Random.Next() % vm.Keys.Length] = 1;
+        vm.Keyboard[(byte)(Random.Next() % 16)] = 1;
         return vm;
     }
     
     internal static VirtualMachine RandomizeKeys(this VirtualMachine vm)
     {
-        for (var i = 0; i < 0xF; i++)
+        for (byte i = 0; i < 16; i++)
         {
-            vm.Keys[i] = (byte)(Random.Next() % 2);
+            vm.Keyboard[i] = (byte)(Random.Next() % 2);
         }
 
         return vm;

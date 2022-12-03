@@ -1,5 +1,5 @@
 
-namespace Chip8;
+namespace Chip8.IO;
 
 internal class NoDisplay : IDisplay
 {
