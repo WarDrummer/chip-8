@@ -105,9 +105,8 @@ public class VirtualMachine
             
         LoadRom(romPath);
         
-        // 500-600 Hz is the recommended average, but that is way too fast
         var targetRefreshRateInTicks 
-            = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 210).Ticks;
+            = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / 600).Ticks;
         
         var stopWatch = Stopwatch.StartNew();
         
