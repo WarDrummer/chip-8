@@ -40,7 +40,7 @@ public class VirtualMachine
     /// <summary>
     ///     Tracks key presses
     /// </summary>
-    internal Keyboard Keyboard { get; }
+    internal IKeyboard Keyboard { get; }
 
     /// <summary>
     ///     4096 bytes of RAM
@@ -81,11 +81,11 @@ public class VirtualMachine
 
     private readonly IRomReader _romReader;
 
-    public VirtualMachine(IDisplay display, Keyboard keyboard): this(new Decoder(), display, keyboard, RomReader.Create()) { }
+    public VirtualMachine(IDisplay display, IKeyboard keyboard): this(new Decoder(), display, keyboard, RomReader.Create()) { }
     
     internal VirtualMachine(): this(new Decoder(), new NoDisplay(), new NoKeyboard(), RomReader.Create()) { }
     
-    internal VirtualMachine(IDecoder decoder, IDisplay display, Keyboard keyboard, IRomReader romReader)
+    internal VirtualMachine(IDecoder decoder, IDisplay display, IKeyboard keyboard, IRomReader romReader)
     {
         _decoder = decoder;
         Display = display;

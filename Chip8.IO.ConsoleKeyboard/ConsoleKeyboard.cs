@@ -1,8 +1,27 @@
-﻿namespace Chip8.IO.ConsoleKeyboard;
+﻿using System.Diagnostics;
 
-public class ConsoleKeyboard : Keyboard
+namespace Chip8.IO.ConsoleKeyboard;
+
+public class ConsoleKeyboard : IKeyboard
 {
-    public override void ReadKey()
+    private readonly byte[] _keys = new byte[16];
+    public bool IsExited { get; private set; }
+
+    public byte this[byte index]
+    {
+        get
+        {
+            Debug.Assert(index < 16);
+            return _keys[index];
+        }
+        set
+        {
+            Debug.Assert(index < 16);
+            _keys[index] = value;
+        }
+    }
+    
+    public void ReadKey()
     {
         if (!Console.KeyAvailable)
         {
@@ -31,5 +50,20 @@ public class ConsoleKeyboard : Keyboard
             case ConsoleKey.V: this[0xF] = 1; break;
             case ConsoleKey.Escape: IsExited = true; break;
         }
+    }
+    
+    public virtual void ClearKeyPresses()
+    {
+        _keys[0x0] = _keys[0x1] = _keys[0x2] = _keys[0x3] =
+        _keys[0x4] = _keys[0x5] = _keys[0x6] = _keys[0x7] =
+        _keys[0x8] = _keys[0x9] = _keys[0xA] = _keys[0xB] =
+        _keys[0xC] = _keys[0xD] = _keys[0xE] = _keys[0xF] 
+            = 0;
+    }
+
+    public virtual void Reset()
+    {
+        IsExited = false;
+        ClearKeyPresses();
     }
 }
