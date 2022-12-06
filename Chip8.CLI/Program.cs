@@ -4,15 +4,16 @@ using Chip8;
 using Chip8.IO.ConsoleKeyboard;
 using Chip8.IO.Display;
 
-HashSet<string> GetRomNames()
+HashSet<string> GetRomNames(char delimiter)
 {
     return new HashSet<string>(
         Directory.GetFiles("Roms")
-            .Select(name => name.Split("/").Last())
+            .Select(name => name.Split(delimiter).Last())
         );
 }
 
-var romNames = GetRomNames();
+var folderDelimiter = Directory.GetFiles("Roms").First()[4]; 
+var romNames = GetRomNames(folderDelimiter);
 var selectedRomName = args.Length > 0 ? $"{args[0]}" : "INVADERS";
 if (!romNames.Contains(selectedRomName))
 {
@@ -20,7 +21,7 @@ if (!romNames.Contains(selectedRomName))
     Environment.Exit(1);
 }
 
-var romPath =  $"Roms/{selectedRomName}";
+var romPath =  $"Roms{folderDelimiter}{selectedRomName}";
 
 if (args.Length > 1 && args[1] == "--dasm")
 {
