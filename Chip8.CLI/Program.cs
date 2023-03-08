@@ -32,7 +32,8 @@ else
 {
     try
     {
-        var vm = new VirtualMachine(new ConsoleDirectDisplay(), new ConsoleKeyboard());
+       var vm = new VirtualMachine(new ConsoleDirectDisplay(), new ConsoleKeyboard());
+        // var vm = new VirtualMachine(new NoDisplay(), new ConsoleKeyboard());
         vm.RunProgram(romPath);
     }
     finally

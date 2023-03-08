@@ -11,7 +11,7 @@ internal class OpcodeToTextParser
 
     public string N => $"${Opcode & 0x000F:X1}";
 
-    public string NN => $"${Opcode & 0x000F:X2}";
+    public string NN => $"${Opcode & 0x00FF:X2}";
 
     public string NNN => $"${Opcode & 0x0FFF:X3}";
 
