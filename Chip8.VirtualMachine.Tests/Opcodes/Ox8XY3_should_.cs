@@ -7,7 +7,7 @@ namespace Chip8.Opcodes;
 public class Ox8XY3_should_
 {
     [Fact]
-    public void set_vx_to_bitwise_and_of_vx_and_vy()
+    public void set_vx_to_bitwise_xor_of_vx_and_vy()
     {
         var opcode = OpcodeGenerator.Create("8XY3");
         var opParams = OpcodeParser.From(opcode);
